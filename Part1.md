@@ -23,14 +23,16 @@
 
 Ответ:
 ```
-[root@localhost ~]$ awk '!/^#/ && NF {print $2, $1}' /etc/protocols | sort -nr | head -5
+localhost:~# awk '{print $2, $1}' /etc/protocols | sort -nr | head -5
+262 mptcp
+143 ethernet
 142 rohc
 141 wesp
 140 shim6
-139 hip
-138 manet
-## Задача 3
 ```
+
+## Задача 3
+
 
 Написать программу banner средствами bash для вывода текстов, как в следующем примере (размер баннера должен меняться!):
 
@@ -39,6 +41,31 @@
 +-----------------------+
 | Hello from RTU MIREA! |
 +-----------------------+
+```
+Ответ:
+```
+d-kiper@MacBook-Air-2 Desktop % ./banner "Goyda"
++-------+
+| Goyda |
++-------+
+```
+banner:
+```
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <text>" >&2
+    exit 1
+fi
+
+text="$*"
+len=${#text}
+width=$((len + 2))
+
+printf -v dashes '%*s' "$width" ''
+dashes=${dashes// /-}
+
+printf '+%s+\n' "$dashes"
+printf '| %s |\n' "$text"
+printf '+%s+\n' "$dashes"
 ```
 
 Перед отправкой решения проверьте его в ShellCheck на предупреждения.
@@ -51,6 +78,11 @@
 
 ```
 h hello include int main n printf return stdio void world
+```
+Ответ:
+```
+grep -oE '[a-zA-Z_][a-zA-Z0-9_]*' hello.c | sort -u | xargs        
+cout endl Goyda include int iostream main namespase return0 std using
 ```
 
 ## Задача 5
